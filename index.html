@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Test Driving</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+
+    <!-- animation style  -->
+    <style>
+      /* Accordion Down Animation */
+      @keyframes accordion-down {
+        from {
+          height: 0;
+        }
+        to {
+          height: var(--radix-accordion-content-height);
+        }
+      }
+
+      /* Accordion Up Animation */
+      @keyframes accordion-up {
+        from {
+          height: var(--radix-accordion-content-height);
+        }
+        to {
+          height: 0;
+        }
+      }
+
+      /* Move Background Animation */
+      @keyframes moveBackground {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 100% 100%;
+        }
+      }
+
+      /* Fade In Animation */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Utility Classes (to simulate Tailwind’s animation config) */
+      .animate-accordion-down {
+        animation: accordion-down 0.2s ease-out;
+      }
+
+      .animate-accordion-up {
+        animation: accordion-up 0.2s ease-out;
+      }
+
+      .animate-moveBackground {
+        animation: moveBackground 30s linear infinite alternate;
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 1s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header  -->
+    <header class="sticky top-0 z-50">
+      <div class="bg-[#4C6621] !py-4">
+        <div
+          class="container mx-auto !px-4 lg:!px-5 flex items-center justify-between "
+        >
+          <!-- Logo -->
+          <div class="text-4xl font-bold text-white">
+            <a href="/">Test Drive</a>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8">
+            <ul class="flex items-center gap-4 md:gap-6 lg:gap-8">
+              <li
+                class="text-[15px] lg:text-[17px] 2xl:text-lg font-normal cursor-pointer text-white leading-[21px]"
+              >
+                Home
+              </li>
+              <li
+                class="text-[15px] lg:text-[17px] 2xl:text-lg font-normal cursor-pointer text-white leading-[21px]"
+              >
+                Driving Test Routes
+              </li>
+              <li
+                class="block md:hidden lg:block text-[15px] lg:text-[17px] 2xl:text-lg font-normal cursor-pointer text-white leading-[21px]"
+              >
+                How it Works
+              </li>
+              <li
+                class="text-[15px] lg:text-[17px] 2xl:text-lg font-normal cursor-pointer text-white leading-[21px]"
+              >
+                Resources
+              </li>
+              <li
+                class="text-[15px] lg:text-[17px] 2xl:text-lg font-normal cursor-pointer text-white leading-[21px]"
+              >
+                Support
+              </li>
+            </ul>
+            <button
+              class="bg-blue-600 text-white !py-3 !px-5 rounded-lg text-base font-bold leading-normal"
+            >
+              Reviews
+            </button>
+          </div>
+
+          <!-- Mobile Toggle -->
+          <div class="block md:hidden">
+            <button id="mobileToggle" class="text-white text-2xl">☰</button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="fixed top-0 left-[-100%] w-[70%] h-[60%] bg-[#4C6621] transition-all duration-500 ease-in-out"
+        >
+          <div class="flex justify-center !pt-5">
+            <div class="text-4xl font-bold text-white">
+              <a href="/">Test Drive</a>
+            </div>
+          </div>
+          <ul class="flex flex-col items-center gap-8 !py-7">
+            <li
+              class="text-[15px] lg:text-[17px] font-normal cursor-pointer text-white leading-[21px]"
+            >
+              Driving Test Routes
+            </li>
+            <li
+              class="text-[15px] lg:text-[17px] font-normal cursor-pointer text-white leading-[21px]"
+            >
+              How it Works
+            </li>
+            <li
+              class="text-[15px] lg:text-[17px] font-normal cursor-pointer text-white leading-[21px]"
+            >
+              Resources
+            </li>
+            <li
+              class="text-[15px] lg:text-[17px] font-normal cursor-pointer text-white leading-[21px]"
+            >
+              Support
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <!-- hero section  -->
+    <section>
+      <div
+        class="bg-cover bg-center bg-no-repeat h-[350px] w-full flex flex-col justify-center items-center animate-moveBackground"
+        style="background-image: url('public/assets/updates/home_banner.jpg')"
+      >
+        <img
+          src="public/assets/updates/map_icon.png"
+          alt="map logo"
+          class="w-[60px] h-[60px]"
+        />
+        <h1
+          class="text-3xl font-bold text-white leading-normal text-center !pt-3"
+        >
+          Driving Test Success Starts Here!
+        </h1>
+      </div>
+    </section>
+    <!-- Driving Test Review section  -->
+    <section>
+      <div class="!py-4 md:!py-12">
+        <div class="container">
+          <h5
+            class="text-base md:text-lg font-bold text-black/75 text-center leading-[21px]"
+          >
+            Driving Test Routes | Motorcycle Test Routes | LGV Test Routes | ADI
+            Test Routes
+          </h5>
+
+          <!-- Large device -->
+          <div class="hidden md:block">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 !mt-12">
+              <!-- Review 1 -->
+              <div class="w-full flex items-center gap-6">
+                <div class="w-full md:w-3/5">
+                  <p class="text-base font-thin text-black/75 leading-[21px]">
+                    “Best driving test app out there! Helped me become more
+                    confident ready for my test.”
+                  </p>
+                </div>
+                <div class="w-full md:w-2/5">
+                  <img
+                    src="/public//assets/app_store.png"
+                    alt="app store"
+                    class="w-[150px] h-auto"
+                  />
+                  <img
+                    src="/public/assets/five_star.png"
+                    alt="five star"
+                    class="!pt-3 w-[150px] h-auto"
+                  />
+                </div>
+              </div>
+
+              <!-- Review 2 -->
+              <div class="w-full flex items-center gap-6">
+                <div class="w-full md:w-3/5">
+                  <p class="text-base font-thin text-black/75 leading-[21px]">
+                    “Passed first time! Practicing the routes really helped!”
+                  </p>
+                </div>
+                <div class="w-full md:w-2/5">
+                  <img
+                    src="/public/assets/google_play.png"
+                    alt="google play"
+                    class="w-[150px] h-auto"
+                  />
+                  <img
+                    src="/public/assets/five_star.png"
+                    alt="five star"
+                    class="!pt-3 w-[150px] h-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Small device -->
+          <div class="block md:hidden">
+            <div class="flex flex-col items-center gap-4 !my-6">
+              <img
+                src="/public/assets/app_store.png"
+                alt="app store"
+                class="w-[150px] h-auto"
+              />
+              <img
+                src="/public/assets/google_play.png"
+                alt="google play"
+                class="w-[150px] h-auto"
+              />
+            </div>
+
+            <!-- Mobile Review 1 -->
+            <div class="pb-6">
+              <p class="text-base font-thin text-black/75 leading-[21px]">
+                “Best driving test app out there! Helped me become more
+                confident ready for my test.”
+              </p>
+              <div class="w-full flex items-center justify-end">
+                <img
+                  src="/public/assets/five_star.png"
+                  alt="five star"
+                  class="pt-3 w-[150px] h-auto"
+                />
+              </div>
+            </div>
+
+            <!-- Mobile Review 2 -->
+            <div>
+              <p class="text-base font-thin text-black/75 leading-[21px]">
+                “Passed first time! Practicing the routes really helped!”
+              </p>
+              <div class="w-full flex items-center justify-end">
+                <img
+                  src="/public/assets/five_star.png"
+                  alt="five star"
+                  class="pt-3 w-[150px] h-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Months App Subscription section   -->
+    <section>
+      <div class="container !px-4 !py-10">
+        <h2
+          class="text-2xl 2xl:text-3xl font-bold leading-[32px] text-black/80 text-center !pt-2 !pb-10"
+        >
+          6 Months App Subscription <br class="block md:hidden" />
+          for the price of one driving <br class="block md:hidden" />
+          lesson!
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Left Column -->
+          <div>
+            <img
+              src="/public/assets/save_money.jpg"
+              alt="save money"
+              class="w-full h-[320px] object-cover"
+            />
+            <h3
+              class="text-2xl 2xl:text-[27px] font-medium text-black/80 text-center !py-8"
+            >
+              Save money on lessons!
+            </h3>
+            <p class="text-[15px] text-black/80 font-thin leading-[20px]">
+              Reduce the amount of driving lessons needed to pass your test.
+              Using our app will help you familiarise yourself with local
+              driving conditions, speed limits, junctions, and test maneuvers.
+              This additional experience can help you pass your test sooner and
+              reduce the time spent with a driving instructor.
+            </p>
+            <p class="text-[15px] text-black/80 font-thin leading-[20px] !pt-3">
+              “Best driving test app out there! Helped me become more confident
+              driving test routes ready for my test.”
+            </p>
+            <h3 class="text-[27px] font-medium text-black/80 text-center !py-8">
+              100% Prepared to pass!
+            </h3>
+            <p class="text-[15px] text-black/80 font-thin leading-[20px]">
+              Download our Driving Test Routes app today! Practice test routes
+              with our easy to use turn-by-turn navigation app
+            </p>
+            <p class="text-[15px] text-black/80 font-thin leading-[20px] !py-3">
+              Practicing your driving test can help reduce nerves and
+              <strong class="font-bold">boost your confidence.</strong> Driving
+              the test routes before taking your practical test is usually done
+              with your driving instructor during lessons. With our test routes,
+              you can practice when it's convenient and at your own pace.
+            </p>
+            <p class="text-[15px] text-black/80 font-thin leading-[20px]">
+              We aim to supply quality test routes to learner car drivers, LGV,
+              motorcycles, and
+              <strong class="font-bold">driving instructors</strong> with the
+              tools to practice driving skills. Our goal is to help you pass
+              you're driving test at the same time saving you money on lessons
+              and multiple exams.
+            </p>
+          </div>
+
+          <!-- Right Column -->
+          <div>
+            <img
+              src="/public/assets/pass_route.jpg"
+              alt="pass route"
+              class="w-full h-[320px] object-cover"
+            />
+            <h3
+              class="text-2xl 2xl:text-[27px] font-medium text-black/80 text-center !py-8"
+            >
+              Pass with Route-Led!
+            </h3>
+            <p class="text-[15px] text-black/80 font-thin leading-[20px] !pb-5">
+              Route-Led supplies some of the most up-to-date
+              <strong class="font-bold">Driving Test Routes in the UK.</strong>
+              We also supply many other websites making us the UK's Number 1
+              Provider of Driving Test Routes. We aim to supply quality routes
+              to learner car drivers, LGV, motorcycle, and driving instructors
+              with the tools to practice driving skills. Our goal is to help you
+              pass you're driving test at the same time saving you money on
+              lessons and multiple exams.
+            </p>
+            <img
+              src="/public/assets/google_map.png"
+              alt="google map"
+              class="w-full h-[400px] object-cover"
+            />
+          </div>
+        </div>
+
+        <p
+          class="text-base text-black/80 font-thin leading-[20px] text-center !py-6"
+        >
+          For more information about our driving test routes app check out the
+          website
+          <a
+            href="https://www.drivingtestroutesapp.co.uk"
+            class="text-blue-600 underline"
+            >www.drivingtestroutesapp.co.uk</a
+          >
+        </p>
+
+        <div
+          class="w-full flex flex-col md:flex-row items-center justify-center gap-5 md:gap-7 2xl:gap-10 !py-2 md:!py-5"
+        >
+          <button
+            class="text-base font-medium text-white leading-[26px] bg-blue-600 !py-3 !px-5 rounded-md"
+          >
+            Find Driving Test Routes
+          </button>
+          <button
+            class="text-base font-medium text-white leading-[26px] bg-blue-600 !py-3 !px-5 rounded-md"
+          >
+            Try our Test Routes App!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Test Centre Coverage section  -->
+    <section>
+      <div class="!pt-[60px] 2xl:!pt-[100px] container">
+        <h2
+          class="text-2xl 2xl:text-3xl font-bold leading-[32px] text-black/80 text-center"
+        >
+          <strong>Complete</strong> UK Test Centre Coverage
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 !mt-8">
+          <!-- Left 2/3 -->
+          <div class="md:col-span-2">
+            <p class="text-[17px] font-bold leading-[21px] text-black/80">
+              As the UK's number 1 provider of driving test routes it comes as
+              no surprise that we cover all UK driving test centres.
+            </p>
+            <p class="text-[17px] font-thin leading-[21px] text-black/80 !py-4">
+              Our app features the very latest practical and mock test routes
+              from all test centres. So no matter where you're learning to drive
+              you can follow the exact routes used on test day.
+            </p>
+            <p class="text-[17px] font-thin leading-[21px] text-black/80">
+              All our routes are updated live using a combination of live GPS
+              data and direct feedback from DVSA driving instructors.
+            </p>
+            <p class="text-[17px] font-bold leading-[21px] text-black/80 !pt-4">
+              We are the only provider to offer live updates of all routes!
+            </p>
+          </div>
+
+          <!-- Right 1/3 -->
+          <div class="md:col-span-1">
+            <h3
+              class="text-[27px] font-medium leading-[29px] text-black/80 !pb-8"
+            >
+              Most Popular
+            </h3>
+            <ul class="list-disc !pl-5">
+              <li
+                class="text-[17px] font-thin leading-[21px] text-blue-600 underline"
+              >
+                Goodmayes Test Routes
+              </li>
+              <li
+                class="text-[17px] font-thin leading-[21px] text-blue-600 underline !py-2"
+              >
+                Pinner Test Routes
+              </li>
+              <li
+                class="text-[17px] font-thin leading-[21px] text-blue-600 underline"
+              >
+                Morden Test Routes
+              </li>
+              <li
+                class="text-[17px] font-thin leading-[21px] text-blue-600 underline !py-2"
+              >
+                Chingford Test Routes
+              </li>
+              <li
+                class="text-[17px] font-thin leading-[21px] text-blue-600 underline"
+              >
+                Isleworth Test Routes
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Practical Driving Test section  -->
+    <section>
+      <div class="!pt-[60px] 2xl:!pt-[100px] container !px-4">
+        <h2
+          class="text-2xl 2xl:text-3xl font-medium leading-[32px] text-black/80 text-center"
+        >
+          The Practical Driving Test. What happens.
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 !mt-6 2xl:!mt-12">
+          <!-- Left Column -->
+          <div>
+            <img
+              class="w-full h-[320px] object-cover"
+              src="/public/assets/driving_test.jpg"
+              alt="driving test"
+            />
+
+            <h4
+              class="text-2xl 2xl:text-[27px] font-medium leading-[29px] text-black/80 !pt-3"
+            >
+              5 Part Driving Test.
+            </h4>
+
+            <p
+              class="text-lg font-medium text-black/80 leading-[20px] !pt-6 2xl:!pt-12"
+            >
+              There are 5 parts to the practical driving test;
+            </p>
+
+            <ul
+              class="list-decimal !pl-5 !pt-6 text-[15px] font-light leading-[20px] text-black/80"
+            >
+              <li>Eyesight Check</li>
+              <li class="!py-2">'Show me tell me' vehicle safety questions.</li>
+              <li>General Driving Ability</li>
+              <li class="!py-2">Reversing your Vehicle</li>
+              <li>Independent Driving</li>
+            </ul>
+
+            <h5 class="text-lg font-medium text-black/80 leading-[20px] !pt-8">
+              How long the test lasts?
+            </h5>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-5">
+              The driving test takes approximately 40mins.
+            </p>
+
+            <h5 class="text-lg font-medium text-black/80 leading-[20px] !pt-8">
+              Eyesight check.
+            </h5>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-5">
+              You'll need to be able to read a number plate at 20 meters.
+            </p>
+
+            <h5 class="text-lg font-medium text-black/80 leading-[20px] !pt-8">
+              'Show me, tell me' questions.
+            </h5>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-5">
+              You'll be asked two vehicle safety questions.
+            </p>
+
+            <h5 class="text-lg font-medium text-black/80 leading-[20px] !pt-8">
+              Your general driving ability.
+            </h5>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-5">
+              Your general driving ability will be assessed in various road and
+              traffic conditions (not motorways). The examiner will give you
+              directions around a
+              <a href="/" class="text-blue-600 underline">driving test route</a>
+              to follow. This portion of your test will include reversing your
+              vehicle, parallel parking, parking in a bay, pulling up on the
+              right-hand side of the road. The final part of your test is 20
+              minutes of independent driving following directions from a sat nav
+              and traffic signs. You might also be asked to perform an emergency
+              stop.
+            </p>
+
+            <h5 class="text-lg font-medium text-black/80 leading-[20px] !pt-8">
+              Making Mistakes on your test.
+            </h5>
+            <p
+              class="text-[15px] font-thin leading-[20px] text-black/80 !pt-5 !pb-8"
+            >
+              If it's not a serious mistake you'll be allowed to continue your
+              driving test.
+            </p>
+
+            <a
+              href="/"
+              class="text-blue-600 underline text-[17px] leading-[21px] font-light"
+            >
+              Driving Test Routes
+            </a>
+
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-5">
+              For more information on UK driving test go to;
+            </p>
+
+            <div class="!mt-4">
+              <button
+                class="text-[17px] font-medium text-white !py-3 !px-6 bg-blue-600 rounded-md"
+              >
+                www.gov.uk
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div>
+            <img
+              class="w-full h-[320px] object-cover"
+              src="/public/assets/pass_plus.jpg"
+              alt="pass plus"
+            />
+
+            <h4
+              class="text-2xl 2xl:text-[27px] font-medium leading-[29px] text-black/80 !pt-3"
+            >
+              Pass Plus.
+            </h4>
+
+            <p
+              class="text-[15px] font-thin leading-[20px] text-black/80 !pt-6 2xl:!pt-12"
+            >
+              Pass Plus is a practical training course that takes around 6 hours
+              for drivers to improve their driving skills.
+            </p>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-2">
+              It can be taken at any time although it should be most useful to
+              new drivers in the year after passing their test.
+            </p>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-2">
+              Once you've completed Pass Plus you can apply for car insurance
+              discounts.
+            </p>
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-2">
+              You'll need a Pass Plus registered approved driving instructor
+              (ADI) to teach you.
+            </p>
+
+            <p
+              class="text-[17px] font-bold leading-[21px] text-blue-600 pt-4 underline cursor-pointer border-b border-black !pb-8"
+            >
+              Book Pass Plus
+            </p>
+
+            <img
+              class="w-full h-[320px] object-cover !pt-12"
+              src="/public/assets/driving_test_route.jpg"
+              alt="driving test route"
+            />
+
+            <h4
+              class="text-[21px] font-bold text-black/80 leading-[27px] !pt-10"
+            >
+              Driving Test Routes
+            </h4>
+
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-4">
+              Using our app will enable you to practice driving on roads you'll
+              encounter on your test. In turn, this will help you concentrate on
+              driving well during your practical exam.
+            </p>
+
+            <p class="text-[15px] font-thin leading-[20px] text-black/80 !pt-4">
+              Practicing test routes will also help you become a more
+              <strong class="font-bold">confident driver.</strong> Learning road
+              layouts, junctions, speed limits can all help you pass your
+              driving test.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Driving Test Routes section  -->
+    <section>
+      <div class="!py-[50px] 2xl:!py-[100px]">
+        <div class="container">
+          <h2
+            class="text-2xl 2xl:text-3xl font-medium leading-[32px] text-black/80 text-center !pb-6 2xl:!pb-10"
+          >
+            What are Sat Nav Driving Test Routes?
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Download Block -->
+            <div>
+              <img
+                src="/public/assets/download.jpg"
+                alt="Download"
+                class="w-full h-[160px] object-cover"
+              />
+              <h4
+                class="text-2xl font-medium leading-[26px] text-black/80 !py-4"
+              >
+                Download
+              </h4>
+              <p class="text-[15px] font-thin leading-[21px] text-black/80">
+                Download driving test routes direct to your phone via our app.
+                <br /><br />
+                We provide test routes for both iOS (iPhone) and Android (Pixel,
+                Galaxy etc.). <br /><br />
+                All our routes provide Turn-by-Turn navigation from within the
+                app.
+              </p>
+            </div>
+
+            <!-- Practice Block -->
+            <div>
+              <img
+                src="/public/assets/practice.jpg"
+                alt="Practice"
+                class="w-full h-[160px] object-cover"
+              />
+              <h4
+                class="text-2xl font-medium leading-[26px] text-black/80 !py-4"
+              >
+                Practice
+              </h4>
+              <p class="text-[15px] font-thin leading-[21px] text-black/80">
+                Using our turn-by-turn navigation to practice practical exam
+                routes. <br /><br />
+                Our routes will navigate you around a set exam route from and
+                back to your driving test centre. Increase your knowledge of
+                roads, junctions, speed limits, and manoeuvres.
+              </p>
+            </div>
+
+            <!-- Pass Block -->
+            <div>
+              <img
+                src="/public/assets/pass.jpg"
+                alt="Pass"
+                class="w-full h-[160px] object-cover"
+              />
+              <h4
+                class="text-2xl font-medium leading-[26px] text-black/80 !py-4"
+              >
+                Download
+              </h4>
+              <p class="text-[15px] font-thin leading-[21px] text-black/80">
+                Increase your chance of passing your driving test using our app.
+                <br /><br />
+                On average 47.5% of learner drivers fail their test and have to
+                re-take. This costs more money in lessons and test fees.
+                <br /><br />
+                Download, practice and pass!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-[#4C6621] !py-4">
+      <div class="container">
+        <p
+          class="text-[15px] font-normal text-white leading-[20px] text-center"
+        >
+          © 2024 Route-Led Group Limited, All rights reserved |
+          info@route-led.com
+        </p>
+        <p
+          class="text-[15px] font-normal text-white leading-[20px] !py-2 text-center"
+        >
+          <span class="underline cursor-pointer">Terms</span> |
+          <span class="underline cursor-pointer">Privacy</span> |
+          <span class="underline cursor-pointer">Sitemap</span>
+        </p>
+        <p
+          class="text-[15px] font-normal text-white leading-[20px] text-center"
+        >
+          In association with:
+          <a
+            href="https://www.drivingtestroutesapp.co.uk"
+            target="_blank"
+            rel="nofollow"
+            class="underline text-white"
+          >
+            www.drivingtestroutesapp.co.uk
+          </a>
+          /
+          <a
+            href="https://www.drivingtestpractice.co.uk"
+            target="_blank"
+            rel="nofollow"
+            class="underline text-white"
+          >
+            www.drivingtestpractice.co.uk
+          </a>
+          /
+          <a
+            href="https://www.dmvroadtestroutes.com"
+            target="_blank"
+            rel="nofollow"
+            class="underline text-white"
+          >
+            www.dmvroadtestroutes.com
+          </a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
